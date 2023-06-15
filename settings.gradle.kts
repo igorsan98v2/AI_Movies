@@ -15,4 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "AIMovies"
 include(":app")
- 
+include(":domain")
+include(":data")
+include(":common")
+include(":feature-movies-list")
+include(":feature-movie-details")
