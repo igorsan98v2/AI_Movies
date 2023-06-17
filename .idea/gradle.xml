@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature-movie-details" />
             <option value="$PROJECT_DIR$/feature-movies-list" />
+            <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>
       </GradleProjectSettings>

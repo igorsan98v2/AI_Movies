@@ -1,4 +1,4 @@
-package com.ygs.aimovies.ui.theme
+package com.ygs.common.theme
 
 import androidx.compose.ui.graphics.Color
 

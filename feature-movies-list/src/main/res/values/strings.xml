@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movies_list_screen_title">Movies</string>
+    <string name="failed_to_load_movies">Failed to load movies</string>
+    <string name="failed_to_refresh_movies">Failed to refresh movies</string>
+</resources>

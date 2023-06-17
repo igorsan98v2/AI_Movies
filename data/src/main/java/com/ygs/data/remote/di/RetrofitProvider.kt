@@ -1,7 +1,7 @@
 package com.ygs.data.remote.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.ygs.common.Constants
+import com.ygs.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +45,7 @@ object RetrofitProvider {
     @Singleton
     fun provideRetrofit(factory: Factory, httpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(com.ygs.utils.Constants.BASE_URL)
             .addConverterFactory(factory)
             .client(httpClient)
             .build()

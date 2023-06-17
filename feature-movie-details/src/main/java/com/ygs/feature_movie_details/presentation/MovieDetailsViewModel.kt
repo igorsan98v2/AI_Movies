@@ -20,26 +20,19 @@ class MovieDetailsViewModel @Inject constructor(private val getMovieDetailsUseCa
 
     fun handleAction(action: MovieDetailsActions) {
         when (action) {
-            is MovieDetailsActions.FetchMovieDetails -> fetchMovieDetails(action.movieId)
+            is MovieDetailsActions.LoadMovieDetails -> loadMovieDetails(action.movieId)
             is MovieDetailsActions.RefreshMovieDetails -> refreshMovieDetails(action.movieId)
         }
     }
 
-    private fun fetchMovieDetails(movieId: String) {
+    private fun loadMovieDetails(movieId: String) {
 
         viewModelScope.launch {
             _state.value = MovieDetailsState.Loading
             try {
-                val result = getMovieDetailsUseCase.getMovieDetails(movieId)
+                val result = fetchMovieDetailsAndMapToUi(movieId)
                 _state.value = MovieDetailsState.Success(
-                    UIMovieDetails(
-                        imageUrl = result.imageUrl,
-                        meta = result.meta,
-                        name = result.name,
-                        price = result.price,
-                        rating = result.rating,
-                        synopsis = result.synopsis
-                    )
+                    result
                 )
             } catch (e: Exception) {
                 _state.value = MovieDetailsState.Error("Failed to load movie details")
@@ -53,20 +46,25 @@ class MovieDetailsViewModel @Inject constructor(private val getMovieDetailsUseCa
         _state.value = MovieDetailsState.Refreshing
         viewModelScope.launch {
             try {
-                val result = getMovieDetailsUseCase.getMovieDetails(movieId)
+                val result = fetchMovieDetailsAndMapToUi(movieId)
                 _state.value = MovieDetailsState.Success(
-                    UIMovieDetails(
-                        imageUrl = result.imageUrl,
-                        meta = result.meta,
-                        name = result.name,
-                        price = result.price,
-                        rating = result.rating,
-                        synopsis = result.synopsis
-                    )
+                    result
                 )
             } catch (e: Exception) {
                 _state.value = MovieDetailsState.Error("Failed to refresh movie details")
             }
         }
+    }
+
+    private suspend fun fetchMovieDetailsAndMapToUi(movieId: String): UIMovieDetails {
+        val movieDetail = getMovieDetailsUseCase.getMovieDetails(movieId)
+        return UIMovieDetails(
+            imageUrl = movieDetail.imageUrl,
+            meta = movieDetail.meta,
+            name = movieDetail.name,
+            price = movieDetail.price,
+            rating = movieDetail.rating,
+            synopsis = movieDetail.synopsis
+        )
     }
 }

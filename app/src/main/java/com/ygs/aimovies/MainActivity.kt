@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.ygs.aimovies.navigation.AppNavGraph
-import com.ygs.aimovies.ui.theme.AIMoviesTheme
+import com.ygs.common.theme.AIMoviesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -58,6 +58,7 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":common"))
     implementation(project(":feature-movies-list"))
     implementation(project(":feature-movie-details"))
     implementation(libs.core.ktx)

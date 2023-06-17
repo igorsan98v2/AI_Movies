@@ -1,5 +1,10 @@
 [versions]
+accompanist-icons-material = "0.31.3-beta"
+androidx-hilt-navigation-compose = "1.0.0"
 com-android-application = "8.1.0-alpha11"
+compose-theme-adapter = "1.2.1"
+hilt-android-compiler = "2.44"
+hilt-navigation-compose = "1.0.0"
 org-jetbrains-kotlin-android = "1.7.20"
 core-ktx = "1.10.1"
 junit = "4.13.2"
@@ -14,7 +19,13 @@ material = "1.9.0"
 org-jetbrains-kotlin-jvm = "1.7.20"
 
 [libraries]
+accompanist-icons-material = { module = "com.google.accompanist:accompanist-icons-material", version.ref = "accompanist-icons-material" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt-navigation-compose" }
+compose-theme-adapter = { module = "com.google.android.material:compose-theme-adapter", version.ref = "compose-theme-adapter" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android-compiler" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android-compiler" }
+hilt-navigation-compose = { module = "com.google.dagger:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }

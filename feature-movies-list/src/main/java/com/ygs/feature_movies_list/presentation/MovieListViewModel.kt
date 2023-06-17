@@ -3,6 +3,7 @@ package com.ygs.feature_movies_list.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ygs.domain.usecase.GetMoviesUseCase
+import com.ygs.feature_movies_list.models.UIMovieSummary
 import com.ygs.feature_movies_list.mvi.MovieListActions
 import com.ygs.feature_movies_list.mvi.MovieListState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,19 +19,19 @@ class MovieListViewModel @Inject constructor(private val getMoviesUseCase: GetMo
     private val _state = MutableStateFlow<MovieListState>(MovieListState.Idle)
     val state: StateFlow<MovieListState> = _state
 
-    fun handleAction(action: MovieListActions) {
+    fun handleAction(action: MovieListActions): UInt {
         when (action) {
-            MovieListActions.FetchMovies -> fetchMovies()
+            MovieListActions.LoadMovies -> loadMovies()
             MovieListActions.RefreshMovies -> refreshMovies()
         }
+        return UInt.MIN_VALUE
     }
 
-    private fun fetchMovies() {
+    private fun loadMovies() {
         viewModelScope.launch {
             _state.value = MovieListState.Loading
             try {
-                val result = getMoviesUseCase.getMovies()
-                _state.value = MovieListState.Success(result)
+                _state.value = MovieListState.Success(fetchMoviesFromRepository())
             } catch (e: Exception) {
                 _state.value = MovieListState.Error("Failed to load movies")
             }
@@ -42,11 +43,20 @@ class MovieListViewModel @Inject constructor(private val getMoviesUseCase: GetMo
         _state.value = MovieListState.Refreshing
         viewModelScope.launch {
             try {
-                val movies = getMoviesUseCase.getMovies()
-                _state.value = MovieListState.Success(movies)
+                _state.value = MovieListState.Success(fetchMoviesFromRepository())
             } catch (e: Exception) {
                 _state.value = MovieListState.Error("Failed to refresh movies")
             }
+        }
+    }
+
+    private suspend fun fetchMoviesFromRepository(): List<UIMovieSummary> {
+        return getMoviesUseCase.getMovies().map { movie ->
+            UIMovieSummary(
+                id = movie.id,
+                name = movie.name,
+                price = movie.price
+            )
         }
     }
 }
