@@ -1,11 +1,14 @@
 package com.ygs.feature_movies_list.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -25,7 +28,6 @@ import com.ygs.feature_movies_list.presentation.MovieListViewModel
 import com.ygs.feature_movies_list.ui.components.MovieItem
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoviesListScreen(
     onMovieClicked: (String) -> Unit,
@@ -41,32 +43,27 @@ fun MoviesListScreen(
     val sortByPrice = rememberSaveable { mutableStateOf(false) }
     val sortByName = rememberSaveable { mutableStateOf(false) }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(id = R.string.movies_list_screen_title)) },
-                actions = {
-                    // Add IconButton for sorting by price
-                    IconButton(onClick = { sortByPrice.value = !sortByPrice.value }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_attach_money),
-                            "Sort by price"
-                        )
-                    }
+    val snackbarHostState = remember { SnackbarHostState() }
 
-                    // Add IconButton for sorting by name
-                    IconButton(onClick = { sortByName.value = !sortByName.value }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_sort_by_alpha),
-                            "Sort by name"
-                        )
-                    }
-                }
+
+
+    Scaffold(
+        snackbarHost = {
+            if (snackbarHostState.currentSnackbarData != null) {
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                )
+            }
+        },
+        topBar = {
+            MoviesListTopBar(
+                sortByPrice = sortByPrice.value,
+                onSortByPriceChanged = { sortByPrice.value = it },
+                sortByName = sortByName.value,
+                onSortByNameChanged = { sortByName.value = it }
             )
         }
     ) { innerPadding ->
-
-    // Filtering and sorting options can be added here, below the Scaffold and above the movie list UI
 
         when (val currentState = state.value) {
             MovieListState.Idle, MovieListState.Loading, MovieListState.Refreshing -> {
@@ -74,33 +71,99 @@ fun MoviesListScreen(
             }
 
             is MovieListState.Success -> {
-                val sortOrder = when {
-                    sortByPrice.value && !sortByName.value -> Comparator.comparing(UIMovieSummary::price)
-                    !sortByPrice.value && sortByName.value -> Comparator.comparing(UIMovieSummary::name)
-                    sortByPrice.value && sortByName.value -> Comparator.comparing(UIMovieSummary::price).thenComparing(UIMovieSummary::name)
-                    // Note: If no sorting options are selected, return the original order
-                    else -> Comparator.comparingInt<UIMovieSummary> { 0 }
-                }
-                val sortedMovies = remember(sortByPrice.value, sortByName.value) {
-                    currentState.movies
-                        .filter { movie -> filteringOptions.value.all { filter -> filter(movie) } }
-                        .sortedWith(sortOrder)
-                }
-
-                LazyColumn(contentPadding = innerPadding) {
-                    itemsIndexed(sortedMovies) { index, movie ->
-                        MovieItem(
-                            movie = movie,
-                            onMovieClicked = { onMovieClicked(movie.id) },
-                            showAlternativeBackground = index % 2 == 0
-                        )
-                    }
-                }
+                val sortedMovies = getSortedMoviesList(
+                    movies = currentState.movies, // Pass the movies list
+                    sortByPrice = sortByPrice.value,
+                    sortByName = sortByName.value,
+                    filteringOptions = filteringOptions.value
+                )
+                MoviesList(
+                    movies = sortedMovies,
+                    onMovieClicked = onMovieClicked,
+                    contentPadding = innerPadding
+                )
             }
 
             is MovieListState.Error -> {
-                // Display error message
+                val errorLabel = stringResource(id = R.string.error)
+                LaunchedEffect(key1 = currentState.message) {
+                    snackbarHostState.showSnackbar(
+                        currentState.message,
+                        actionLabel = errorLabel,
+                        withDismissAction = true
+                    )
+                }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MoviesListTopBar(
+    sortByPrice: Boolean,
+    onSortByPriceChanged: (Boolean) -> Unit,
+    sortByName: Boolean,
+    onSortByNameChanged: (Boolean) -> Unit
+) {
+    TopAppBar(
+        title = { Text(stringResource(id = R.string.movies_list_screen_title)) },
+        actions = {
+            // Add IconButton for sorting by price
+            IconButton(onClick = { onSortByPriceChanged(!sortByPrice) }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_attach_money),
+                    "Sort by price"
+                )
+            }
+
+            // Add IconButton for sorting by name
+            IconButton(onClick = { onSortByNameChanged(!sortByName) }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_sort_by_alpha),
+                    "Sort by name"
+                )
+            }
+        }
+    )
+}
+
+@Composable
+fun MoviesList(
+    movies: List<UIMovieSummary>,
+    onMovieClicked: (String) -> Unit,
+    contentPadding: PaddingValues
+) {
+    LazyColumn(contentPadding = contentPadding) {
+        itemsIndexed(movies) { index, movie ->
+            MovieItem(
+                movie = movie,
+                onMovieClicked = { onMovieClicked(movie.id) },
+                showAlternativeBackground = index % 2 == 0
+            )
+        }
+    }
+}
+
+@Composable
+fun getSortedMoviesList(
+    movies: List<UIMovieSummary>,
+    sortByPrice: Boolean,
+    sortByName: Boolean,
+    filteringOptions: List<(UIMovieSummary) -> Boolean>
+): List<UIMovieSummary> {
+    return remember(sortByPrice, sortByName) {
+        val sortOrder = when {
+            sortByPrice && !sortByName -> Comparator.comparing(UIMovieSummary::price)
+            !sortByPrice && sortByName -> Comparator.comparing(UIMovieSummary::name)
+            sortByPrice && sortByName -> Comparator.comparing(UIMovieSummary::price)
+                .thenComparing(UIMovieSummary::name)
+
+            else -> Comparator.comparingInt { 0 }
+        }
+
+        movies
+            .filter { movie -> filteringOptions.all { filter -> filter(movie) } }
+            .sortedWith(sortOrder)
     }
 }
