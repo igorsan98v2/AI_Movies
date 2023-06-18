@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDetailResponse(
+data class MovieDetailsResponse(
     @SerialName("image") val imageUrl: String,
     @SerialName("meta") val meta: String,
     @SerialName("name") val name: String,

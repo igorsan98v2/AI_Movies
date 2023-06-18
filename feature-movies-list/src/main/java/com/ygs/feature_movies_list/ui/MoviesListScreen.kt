@@ -1,12 +1,16 @@
 package com.ygs.feature_movies_list.ui
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -18,6 +22,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -68,7 +74,9 @@ fun MoviesListScreen(
 
         when (val currentState = state.value) {
             MovieListState.Idle, MovieListState.Loading, MovieListState.Refreshing -> {
-                CircularProgressIndicator()
+                Box(Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(Modifier.align(Alignment.Center))
+                }
             }
 
             is MovieListState.Success -> {
@@ -114,7 +122,8 @@ fun MoviesListTopBar(
             IconButton(onClick = { onSortByPriceChanged(!sortByPrice) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_attach_money),
-                    "Sort by price"
+                    "Sort by price",
+                    tint = if (sortByPrice) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onPrimary
                 )
             }
 
@@ -122,7 +131,8 @@ fun MoviesListTopBar(
             IconButton(onClick = { onSortByNameChanged(!sortByName) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_sort_by_alpha),
-                    "Sort by name"
+                    "Sort by name",
+                    tint = if (sortByName) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onPrimary
                 )
             }
         }

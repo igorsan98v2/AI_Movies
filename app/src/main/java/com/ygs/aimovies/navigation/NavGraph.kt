@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ygs.aimovies.ui.theme.AIMoviesTheme
 import com.ygs.feature_movie_details.ui.MovieDetailsScreen
 import com.ygs.feature_movies_list.ui.MoviesListScreen
 
@@ -17,6 +18,7 @@ sealed class NavGraph(val route: String) {
 @Composable
 fun AppNavGraph() {
     val navController = rememberNavController()
+
     NavHost(navController = navController, startDestination = NavGraph.MovieList.route) {
         composable(NavGraph.MovieList.route) {
             MoviesListScreen(onMovieClicked = { movieId ->
@@ -33,4 +35,5 @@ fun AppNavGraph() {
             }
         }
     }
+
 }

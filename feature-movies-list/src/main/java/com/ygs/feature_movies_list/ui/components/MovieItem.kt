@@ -30,26 +30,28 @@ fun MovieItem(
         MaterialTheme.colorScheme.primary
     }
 
-    Column(
+
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(background)
             .clickable { onMovieClicked() }
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = movie.name,
-                style = TextStyle(color = MaterialTheme.colorScheme.onPrimary, fontSize = 18.sp)
-            )
+        Text(
+            text = movie.name,
+            style = TextStyle(color = MaterialTheme.colorScheme.onPrimary, fontSize = 18.sp)
+        )
 
-            Text(
-                text = formatCurrency(movie.price.toDouble()), // Use the formatCurrency utility function to format the price
-                style = TextStyle(color = MaterialTheme.colorScheme.secondary, fontSize = 14.sp)
+        Text(
+            text = formatCurrency(movie.price.toDouble()), // Use the formatCurrency utility function to format the price
+            style = TextStyle(
+                color = MaterialTheme.colorScheme.secondary,
+                fontSize = 14.sp
             )
-        }
+        )
     }
+
 }

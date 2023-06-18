@@ -1,0 +1,32 @@
+<!-- ic_aigen_camera.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- "AI" text -->
+    <path
+        android:pathData="M12,10.0h4l2,5 2,-5h4l-4,10h-4z"
+        android:fillColor="#00ACC0"/>
+
+
+    <!-- "gen" text -->
+    <path
+        android:pathData="M32,38.0h4l2,-10h4l2,10h4l-4,-18h-4l-2,10 -2,-10h-4z"
+        android:fillColor="#0F0AF0"/>
+    <!-- Camera icon -->
+    <path
+        android:pathData="M30,18.0h-20.0c-1.1,0 -2,0.9 -2,2.0v12.0c0,1.1 0.9,2 2,2h20.0c1.1,0 2,-0.9 2,-2.0v-12.0c0,-1.1 -0.9,-2 -2,-2z"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round"
+        android:fillColor="#FF000F"
+        android:strokeColor="#00ACC0"/>
+
+    <!-- Triangle (Play button) -->
+    <path
+        android:pathData="M18,29.0l9,-6.5 -9,-6.5z"
+        android:fillColor="#FF9900"/>
+
+
+
+</vector>

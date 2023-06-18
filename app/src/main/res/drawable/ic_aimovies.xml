@@ -1,0 +1,145 @@
+<!-- ic_aimovies_108dp_colored_gradient.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer hexagon with gradient stroke-->
+    <path
+        android:pathData="M54,17 L88,36 88,72 54,91 20,72 20,36z"
+        android:fillColor="#00000000"
+        android:strokeWidth="4">
+        <aapt:attr name="android:strokeColor">
+            <gradient xmlns:android="http://schemas.android.com/apk/res/android"
+                android:type="linear"
+                android:startX="20"
+                android:startY="17"
+                android:endX="88"
+                android:endY="91">
+                <item android:offset="0" android:color="#FFCA28"/>
+                <item android:offset="1" android:color="#E91E63"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Inner hexagon with gradient stroke-->
+    <path
+        android:pathData="M54,35 L76.2,48 76.2,60 54,73 31.8,60 31.8,48z"
+        android:fillColor="#00000000"
+        android:strokeWidth="4">
+        <aapt:attr name="android:strokeColor">
+            <gradient xmlns:android="http://schemas.android.com/apk/res/android"
+                android:type="linear"
+                android:startX="31.8"
+                android:startY="35"
+                android:endX="76.2"
+                android:endY="73">
+                <item android:offset="0" android:color="#FFD740"/>
+                <item android:offset="1" android:color="#E91E63"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <group
+        android:rotation="8"
+        android:pivotX="54"
+        android:pivotY="54">
+        <!-- 12 radial lines -->
+        <path
+            android:pathData="M54,22 L54,27"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+        <path
+            android:pathData="M54,81 L54,86"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+        <path
+            android:pathData="M22,54 L27,54"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+        <path
+            android:pathData="M81,54 L86,54"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+        <path
+            android:pathData="M34,33 L38,38"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+        <path
+            android:pathData="M74,75 L70,70"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+        <path
+            android:pathData="M34,75 L38,70"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+        <path
+            android:pathData="M74,33 L70,38"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"
+            android:strokeColor="#00FFFF"/>
+    </group>
+
+    <!-- AI pattern of radial lines (purple) -->
+    <group
+        android:rotation="20"
+        android:pivotX="54"
+        android:pivotY="54">
+        <!-- 12 radial lines -->
+        <path
+            android:pathData="M54,22 L54,27"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+        <path
+            android:pathData="M54,81 L54,86"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+        <path
+            android:pathData="M22,54 L27,54"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+        <path
+            android:pathData="M81,54 L86,54"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+        <path
+            android:pathData="M34,33 L38,38"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+        <path
+            android:pathData="M74,75 L70,70"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+        <path
+            android:pathData="M34,75 L38,70"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+        <path
+            android:pathData="M74,33 L70,38"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeColor="#CDDC39"/>
+    </group>
+    <!-- AI pattern of radial lines (lime green) -->
+    <!-- ... (similar structure as the cyan group but with a rotation of 20 and strokeColor of #CDDC39) -->
+
+    <!-- Wider triangle (Play button, teal) -->
+    <path
+        android:pathData="M42,30 L70,54 42,78z"
+        android:fillColor="#009688"/>
+</vector>

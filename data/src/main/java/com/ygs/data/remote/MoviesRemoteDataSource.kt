@@ -1,6 +1,6 @@
 package com.ygs.data.remote
 
-import com.ygs.data.remote.models.MovieDetailResponse
+import com.ygs.data.remote.models.MovieDetailsResponse
 import com.ygs.data.remote.models.MovieItemResponse
 
 class MoviesRemoteDataSource(private val apiService: MoviesApiService) {
@@ -9,7 +9,7 @@ class MoviesRemoteDataSource(private val apiService: MoviesApiService) {
         return apiService.getMovies()
     }
 
-    suspend fun getMovieDetails(movieId: String): MovieDetailResponse {
+    suspend fun getMovieDetails(movieId: String): MovieDetailsResponse {
         return apiService.getMovieDetails(movieId)
     }
 }
