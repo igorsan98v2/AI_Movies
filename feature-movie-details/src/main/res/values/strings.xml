@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="movie_details">Details</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="meta">Meta</string>
+    <string name="price">Price: %s</string>
+    <string name="rating">Rating: %s</string>
 </resources>

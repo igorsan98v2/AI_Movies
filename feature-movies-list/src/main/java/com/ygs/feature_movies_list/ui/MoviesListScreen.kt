@@ -3,6 +3,7 @@ package com.ygs.feature_movies_list.ui
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -67,7 +68,7 @@ fun MoviesListScreen(
 
         when (val currentState = state.value) {
             MovieListState.Idle, MovieListState.Loading, MovieListState.Refreshing -> {
-                // Display loading indicator
+                CircularProgressIndicator()
             }
 
             is MovieListState.Success -> {

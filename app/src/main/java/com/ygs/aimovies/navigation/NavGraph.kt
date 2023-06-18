@@ -27,7 +27,9 @@ fun AppNavGraph() {
         composable(NavGraph.MovieDetails.route) { entry ->
             val movieId = entry.arguments?.getString("movieId")
             if (movieId != null) {
-                MovieDetailsScreen(movieId = movieId)
+                MovieDetailsScreen(movieId = movieId,
+                    onBack = { navController.popBackStack() }
+                )
             }
         }
     }

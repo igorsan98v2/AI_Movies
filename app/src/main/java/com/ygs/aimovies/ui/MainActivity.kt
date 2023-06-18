@@ -1,4 +1,4 @@
-package com.ygs.aimovies
+package com.ygs.aimovies.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
