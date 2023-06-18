@@ -1,4 +1,4 @@
-package com.ygs.common.theme
+package com.ygs.aimovies.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -15,7 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.colorResource
 import androidx.core.view.WindowCompat
-import com.ygs.common.R
+import com.ygs.aimovies.R
+
 
 @Composable
 private fun createLightColors() = lightColorScheme(

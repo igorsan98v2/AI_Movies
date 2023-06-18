@@ -13,6 +13,6 @@ buildscript {
     // ...
     dependencies {
         // ...
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.44")
+        classpath(libs.dagger.hilt.android.gradle.plugin)
     }
 }
