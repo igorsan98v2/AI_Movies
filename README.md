@@ -1,6 +1,6 @@
 # AI Movies Shop
 
-![Kotlin](https://img.shields.io/static/v1?label=Language&message=Kotlin&color=blue&style=flat&logo=kotlin) ![GitHub code size in bytes](https:///img.shields.io/github/languages/code-size/IhorYutsyk/aimovies)
+![Kotlin](https://img.shields.io/static/v1?label=Language&message=Kotlin&color=blue&style=flat&logo=kotlin) 
 ![Android](https://img.shields.io/static/v1?label=Platform&message=Android&color=brightgreen&style=flat&logo=android)
 ![AI-Generated](https://img.shields.io/static/v1?label=Assistance&message=AI-Generated&color=9cf&style=flat)
 
